@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from python_usernames import is_safe_username
-from wtforms import PasswordField, StringField, SubmitField, ValidationError
-from wtforms.validators import DataRequired, Length
+from wtforms import PasswordField, StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Length, ValidationError
 
 from app.models import User
 
@@ -23,3 +23,10 @@ class UserRegistrationForm(FlaskForm):
             raise ValidationError(
                 "Bu foydalanuvchi nomi allaqachon band. Iltimos, boshqasini tanlang."
             )
+
+
+class PostForm(FlaskForm):
+    content = TextAreaField(
+        "Post tarkibi", validators=[DataRequired(), Length(max=300)]
+    )
+    submit = SubmitField("Yaratish")
