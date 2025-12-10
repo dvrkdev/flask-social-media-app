@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Tizimga kirish{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <form action="{{ url_for('auth.login') }}" method="post" class="col-md-6">
+            {{ form.hidden_tag() }}
+            <h2 class="text-center mb-4">Tizimga kirish</h2>
+            <div class="mb-3">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control form-control-lg") }}
+            </div>
+            <div class="mb-5">
+                {{ form.password.label(class="form-label") }}
+                {{ form.password(class="form-control form-control-lg") }}
+            </div>
+            {{ form.submit(class="btn btn-lg btn-success d-block mx-auto") }}
+        </form>
+        <p class="text-center mt-4">Hisobingiz yo'qmi? <a href="{{ url_for('auth.register') }}">Bu yerda ro'yxatdan o'ting!</a></p>
+    </div>
+{% endblock %}

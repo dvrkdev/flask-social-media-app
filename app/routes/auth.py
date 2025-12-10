@@ -13,14 +13,14 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 @bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("main.index"))
+        return redirect(url_for("main.home"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=True)
             flash("Qaytib kelganingizdan xursandmiz!", "success")
-            return redirect(url_for("main.index"))
+            return redirect(url_for("main.home"))
         else:
             flash("Noto'g'ri foydalanuvchi nomi yoki parol", "danger")
     return render_template("login.html", form=form)
