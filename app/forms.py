@@ -30,3 +30,11 @@ class PostForm(FlaskForm):
         "Post tarkibi", validators=[DataRequired(), Length(max=300)]
     )
     submit = SubmitField("Yaratish")
+
+
+class LoginForm(FlaskForm):
+    username = StringField(
+        "Foydalanuvchi nomi", validators=[DataRequired(), Length(min=5, max=64)]
+    )
+    password = PasswordField("Parol", validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField("Kirish")
