@@ -4,9 +4,7 @@
 {% block content %}
     {% if current_user.is_authenticated %}
         <div class="d-flex justify-content-end mb-3">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newPostModal">
-                Yangi post
-            </button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newPostModal">Yangi post</button>
         </div>
         <div class="modal fade" id="newPostModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -32,30 +30,19 @@
     {% if posts %}
         <h4 class="mb-3">Barcha postlar</h4>
         <div class="list-group">
-
-    {% for post in posts %}
-    <div class="list-group-item py-3 border-0 border-bottom">
-        <div class="d-flex w-100 justify-content-between mb-2">
-            <h6 class="mb-0 fw-semibold">@{{ post.author.username }}</h6>
-            <small class="text-muted">{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+            {% for post in posts %}
+                <div class="list-group-item py-3 border-0 border-bottom">
+                    <div class="d-flex w-100 justify-content-between mb-2">
+                        <h6 class="mb-0 fw-semibold">@{{ post.author.username }}</h6>
+                        <small class="text-muted">{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                    </div>
+                    <p class="mb-2">{{ post.content }}</p>
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-sm btn-outline-danger d-flex align-items-center"><i class="bi bi-hand-thumbs-up me-1"></i> Like</button>
+                        <button type="button" class="btn btn-sm btn-secondary d-flex align-items-center"><i class="bi bi-chat-left-text me-1"></i> Comment</button>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-
-        <p class="mb-2">{{ post.content }}</p>
-
-        <div class="d-flex gap-3">
-            <button type="button" class="btn btn-sm btn-outline-danger d-flex align-items-center">
-                <i class="bi bi-hand-thumbs-up me-1"></i> Like
-            </button>
-
-            <button type="button" class="btn btn-sm btn-secondary d-flex align-items-center">
-                <i class="bi bi-chat-left-text me-1"></i> Comment
-            </button>
-        </div>
-    </div>
-{% endfor %}
-
-
-</div>
-
     {% endif %}
 {% endblock %}
