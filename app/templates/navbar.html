@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('main.home') }}">Tarmoq</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuToggler"
+            aria-controls="menuToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuToggler">
+            <div class="navbar-nav">
+                {% if current_user.is_authenticated %}
+                    <a class="nav-link {% if request.endpoint == 'main.home' %}active{% endif %}"
+                        href="{{ url_for('main.home') }}">Bosh sahifa</a>
+                    <a class="nav-link {% if request.endpoint == 'auth.logout' %}active{% endif %}"
+                        href="{{ url_for('auth.logout') }}">Chiqish</a>
+                {% else %}
+                    <a class="nav-link {% if request.endpoint == 'auth.login' %}active{% endif %}"
+                        href="{{ url_for('auth.login') }}">Kirish</a>
+                    <a class="nav-link {% if request.endpoint == 'auth.register' %}active{% endif %}"
+                        href="{{ url_for('auth.register') }}">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
