@@ -7,7 +7,7 @@ from app.models import User
 
 
 class UserRegistrationForm(FlaskForm):
-    name = StringField("Ism", validators=[DataRequired(), Length(max=64)])
+    name = StringField("Ism", validators=[Length(max=64)])
     username = StringField(
         "Foydalanuvchi nomi", validators=[DataRequired(), Length(min=5, max=64)]
     )
