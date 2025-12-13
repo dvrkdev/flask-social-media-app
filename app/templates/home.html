@@ -27,14 +27,42 @@
             </div>
         </div>
     {% endif %}
+
     {% if posts %}
         <h4 class="mb-3">Barcha postlar</h4>
         <div class="list-group">
             {% for post in posts %}
                 <div class="list-group-item py-3 border-0 border-bottom">
-                    <div class="d-flex w-100 justify-content-between mb-2">
-                        <h6 class="mb-0 fw-semibold">{% if post.author.name %}{{ post.author.name }}{% else %}@{{ post.author.username }}{% endif %}</h6>
-                        <small class="text-muted">{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+
+
+                    <div class="d-flex w-100 justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0 fw-semibold">
+                            {% if post.author.name %}
+                                {{ post.author.name }}
+                            {% else %}
+                                @{{ post.author.username }}
+                            {% endif %}
+                        </h6>
+                        <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                            <small class="text-muted text-nowrap">
+                                {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}
+                            </small>
+                            {% if current_user.id == post.user_id %}
+                                <!-- Desktop buttons -->
+                                <div class="d-none d-md-flex gap-1">
+                                    <a href="" class="btn btn-sm btn-outline-success"><i class="bi bi-pencil-square"></i></a>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ post.id }}"><i class="bi bi-trash3"></i></button>
+                                </div>
+                                <!-- Mobile dropdown -->
+                                <div class="dropdown d-md-none">
+                                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical"></i></button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href=""><i class="bi bi-pencil-square me-2"></i> Tahrirlash</a></li>
+                                        <li><button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ post.id }}"><i class="bi bi-trash3 me-2"></i> O'chirish</button></li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                     <p class="mb-2">{{ post.content }}</p>
                     <div class="d-flex gap-3">
