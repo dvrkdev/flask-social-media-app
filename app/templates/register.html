@@ -7,6 +7,10 @@
             {{ form.hidden_tag() }}
             <h2 class="text-center mb-4">Ro'yxatdan o'tish</h2>
             <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control form-control-lg") }}
+            </div>
+            <div class="mb-3">
                 {{ form.username.label(class="form-label") }}
                 {{ form.username(class="form-control form-control-lg") }}
             </div>

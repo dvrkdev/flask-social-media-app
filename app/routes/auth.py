@@ -33,7 +33,7 @@ def register():
     form = UserRegistrationForm()
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
-        user = User(username=form.username.data, password=hashed_password)
+        user = User(name=form.name.data, username=form.username.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         login_user(user, remember=True)

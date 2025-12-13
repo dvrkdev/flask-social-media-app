@@ -8,6 +8,7 @@ from app import db
 class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
     username = db.Column(db.String(64), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     posts = db.relationship("Post", backref="author", lazy=True)
